@@ -216,3 +216,13 @@ button:hover {
     display: block;
     /* Exibe a imagem quando a carta está virada */
 }
+
+.carta.certa {
+    border: 2px solid green;
+    /* Borda verde para cartas corretas */
+}
+
+.carta.errada {
+    border: 2px solid red;
+    /* Borda vermelha para cartas erradas */
+}
