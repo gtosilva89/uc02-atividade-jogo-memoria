@@ -210,6 +210,15 @@ function endGame() {
         if (contador === 0) { // Quando o contador chega a 0
             clearInterval(intervaloContador); // Para o contador
             mensagemVitoria.style.display = 'none'; // Esconde a div de vitória
+
+            // Mensagem de atualização do Windows
+            alert("O seu Windows será atualizado."); // Exibe a mensagem de atualização
+
+            // Exibe a imagem de tela azul por 3 segundos
+            document.body.innerHTML = `<img src="./assets/img/jpg/tela_azul.jpg" alt="Tela Azul" style="width: 100%; height: 100%; object-fit: cover;">`; // Substitui o conteúdo da body pela imagem de tela azul
+            setTimeout(() => {
+                location.reload(); // Atualiza a página após 3 segundos
+            }, 3000); // Espera 3 segundos antes de atualizar a página
         }
     }, 1000); // Atualiza o contador a cada segundo
 }
