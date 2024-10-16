@@ -12,11 +12,15 @@ let paresEncontrado = 0; // Contador de pares encontrados
 let tempoInicial, contadorTempo; // Variáveis para controle de tempo
 let erroCount = 0; // Contador de erros
 let jogoConcluido = false; // Flag para verificar se o jogo foi concluído
+let pontuacao = 0; // Variável para armazenar a pontuação do jogador
+let tentativas = 0; // Variável para armazenar o número de tentativas
 
 // ELEMENTOS DO DOM
 const board = document.getElementById('game'); // Elemento do tabuleiro
 const timerDisplay = document.getElementById('timer'); // Exibição do cronômetro
 const errorCountDisplay = document.getElementById('errorCount'); // Exibição do contador de erros
+const scoreDisplay = document.getElementById('score'); // Exibição da pontuação
+const attemptsDisplay = document.getElementById('attempts'); // Exibição do contador de tentativas
 
 // FUNÇÃO PARA EMBARALHAR AS IMAGENS
 function shuffle(array) {
@@ -33,6 +37,9 @@ function createBoard() {
         carta.addEventListener('click', flipCard); // Adiciona evento de clique para virar a carta
         board.appendChild(carta); // Adiciona a carta ao tabuleiro
     });
+
+    scoreDisplay.textContent = `Pontuação: ${pontuacao}`; // Inicializa a pontuação na tela
+    attemptsDisplay.textContent = `Tentativas: ${tentativas}`; // Inicializa o contador de tentativas na tela
 }
 
 // FUNÇÃO PARA VIRAR A CARTA
@@ -42,6 +49,8 @@ function flipCard() {
     this.classList.add('flipped'); // Adiciona a classe que vira a carta
 
     if (!cartaVirada) { // Se ainda não houver uma carta virada
+        tentativas++; // Incrementa o contador de tentativas
+        attemptsDisplay.textContent = `Tentativas: ${tentativas}`; // Atualiza o contador de tentativas na tela
         cartaVirada = true; // Marca que uma carta foi virada
         primeiraCarta = this; // Armazena a primeira carta virada
         if (!tempoInicial) { // Se o cronômetro não começou ainda
@@ -62,6 +71,21 @@ function checkForMatch() {
         segundaCarta.classList.add('certa'); // Adiciona a classe "certa" à segunda carta
         disableCards(); // Desabilita o clique nas cartas corretas
         paresEncontrado++; // Incrementa o contador de pares encontrados
+
+        // Pontuação baseada na quantidade de tentativas
+        if (tentativas === 1) {
+            pontuacao += 15; // 1ª tentativa: 15 pontos
+        } else if (tentativas === 2) {
+            pontuacao += 7; // 2ª tentativa: 7 pontos
+        } else {
+            pontuacao += 2; // A partir da 3ª tentativa: 2 pontos
+        }
+
+        scoreDisplay.textContent = `Pontuação: ${pontuacao}`; // Atualiza a exibição da pontuação
+        tentativas = 0; // Reseta o contador de tentativas
+
+        attemptsDisplay.textContent = `Tentativas: ${tentativas}`; // Atualiza o contador de tentativas na tela
+
         if (paresEncontrado === 8) { // Se todos os pares foram encontrados
             endGame(); // Finaliza o jogo
         }
@@ -116,7 +140,8 @@ function endGame() {
     const textoVitoria = document.getElementById('textoVitoria'); // Seleciona o parágrafo onde o texto será exibido
     const contadorVitoria = document.getElementById('contadorVitoria'); // Seleciona o parágrafo onde o contador será exibido
 
-    textoVitoria.textContent = `Parabéns! Você encontrou todos os pares!\nTempo: ${tempoDecorrido} segundos\nErros: ${erroCount}`; // Insere a mensagem de vitória
+    // Insere a mensagem de vitória com tempo, erros e pontuação
+    textoVitoria.textContent = `Parabéns! Você encontrou todos os pares!\nTempo: ${tempoDecorrido} segundos\nErros: ${erroCount}\nPontuação: ${pontuacao}`;
     mensagemVitoria.style.display = 'block'; // Exibe a div de vitória
 
     // Cria o elemento de áudio
@@ -140,7 +165,11 @@ function restartGame() {
     board.innerHTML = ''; // Limpa o tabuleiro
     paresEncontrado = 0; // Reseta o contador de pares encontrados
     erroCount = 0; // Reseta o contador de erros
+    pontuacao = 0; // Reseta a pontuação
+    tentativas = 0; // Reseta o contador de tentativas
     errorCountDisplay.textContent = `Erros: ${erroCount}`; // Atualiza o contador de erros na tela
+    scoreDisplay.textContent = `Pontuação: ${pontuacao}`; // Atualiza a pontuação na tela
+    attemptsDisplay.textContent = `Tentativas: ${tentativas}`; // Atualiza o contador de tentativas na tela
     tempoInicial = null; // Reseta o tempo inicial
     clearInterval(contadorTempo); // Para o cronômetro
     timerDisplay.textContent = `Tempo: 0s`; // Reseta o cronômetro na tela

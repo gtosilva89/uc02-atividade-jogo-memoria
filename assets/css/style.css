@@ -83,9 +83,11 @@ body {
     /* Centraliza os elementos horizontalmente */
 }
 
-/* Estilos do timer e contador de erros */
+/* Estilos do timer, contador de erros, pontuação e tentativas */
 #timer,
-#errorCount {
+#errorCount,
+#score,
+#attempts {
     font-size: 20px;
     /* Define o tamanho da fonte */
     margin-top: 10px;
