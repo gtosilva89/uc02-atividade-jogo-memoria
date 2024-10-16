@@ -3,7 +3,7 @@
 *::before,
 *::after {
     box-sizing: border-box;
-    /* Inclui padding e border na largura e altura total dos elementos */
+    /* Inclui padding e borda no cálculo da largura/altura dos elementos */
 }
 
 * {
@@ -13,39 +13,20 @@
     /* Remove padding de todos os elementos */
 }
 
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-figure,
-blockquote,
-dl,
-dd {
-    margin-block-end: 0;
-    /* Remove a margem inferior dos elementos de bloco */
-}
-
-/* FIM RESET GLOBAL */
-
-/* CENTRALIZAR PÁGINA */
 body {
     display: flex;
-    /* Usa Flexbox para centralizar elementos */
+    /* Usa flexbox para organizar os elementos filhos */
     justify-content: center;
-    /* Centraliza horizontalmente */
+    /* Centraliza os elementos horizontalmente */
     align-items: center;
-    /* Centraliza verticalmente */
+    /* Centraliza os elementos verticalmente */
     height: 100vh;
     /* Define a altura do body como 100% da altura da viewport */
-    margin: 0;
-    /* Remove margens do body */
     flex-direction: column;
-    /* Organiza os filhos em coluna */
+    /* Organiza os filhos em uma coluna */
 }
 
-/* DEFINIR DIMENSÕES DIV ROOT */
+/* Estilos da div principal do jogo */
 #root {
     width: 1000px;
     /* Define a largura do container principal */
@@ -53,112 +34,92 @@ body {
     /* Define a altura do container como 90% da altura da viewport */
 }
 
-/* DEFINIR DIMENSÕES DIV HEADER */
+/* Estilos do cabeçalho */
 #header {
     width: 100%;
-    /* O cabeçalho ocupa 100% da largura do root */
+    /* Cabeçalho ocupa 100% da largura do container */
     height: 10%;
-    /* Define a altura do cabeçalho como 10% do root */
+    /* Define a altura do cabeçalho como 10% do container */
     text-align: center;
     /* Centraliza o texto dentro do cabeçalho */
     font-size: 25px;
-    /* Define o tamanho da fonte do cabeçalho */
+    /* Define o tamanho da fonte do título */
 }
 
-/* ESPAÇO H1 */
 #header h1 {
     color: black;
-    /* Define a cor do texto do cabeçalho como preto */
+    /* Define a cor do texto como preto */
     padding-top: 10px;
-    /* Adiciona um espaço acima do título */
+    /* Adiciona um espaçamento superior */
 }
 
-/* DEFINIR DIMENSÕES DA DIV BODY */
+/* Estilos do corpo do jogo */
 #body {
     margin-top: 5px;
-    /* Adiciona espaço acima do corpo do jogo */
+    /* Adiciona um espaço superior entre o cabeçalho e o corpo */
     width: 100%;
-    /* O corpo ocupa 100% da largura do root */
+    /* O corpo ocupa 100% da largura do container */
     height: auto;
     /* A altura se ajusta automaticamente ao conteúdo */
     padding-bottom: 10px;
-    /* Adiciona espaço abaixo do corpo */
+    /* Adiciona um espaçamento inferior */
     padding-top: 10px;
-    /* Adiciona espaço acima do corpo */
+    /* Adiciona um espaçamento superior */
 }
 
-/* DEFINIR DIMENSÕES DA DIV FOOTER */
+/* Estilos do rodapé */
 #footer {
     margin-top: 5px;
-    /* Adiciona espaço acima do rodapé */
+    /* Adiciona um espaço superior entre o corpo e o rodapé */
     width: 100%;
-    /* O rodapé ocupa 100% da largura do root */
+    /* O rodapé ocupa 100% da largura do container */
     height: 10%;
-    /* Define a altura do rodapé como 10% do root */
-}
-
-/* ALINHAMENTO TIMER */
-#footer {
-    margin-top: 5px;
-    /* Adiciona espaço acima do rodapé */
-    width: 100%;
-    /* O rodapé ocupa 100% da largura do root */
-    height: 10%;
-    /* Define a altura do rodapé como 10% do root */
+    /* Define a altura do rodapé como 10% do container */
     display: flex;
-    /* Usa Flexbox para organizar os elementos */
+    /* Usa flexbox para organizar os elementos filhos */
     flex-direction: column;
-    /* Organiza os filhos em coluna */
+    /* Organiza os filhos em uma coluna */
     align-items: center;
-    /* Centraliza os filhos horizontalmente */
+    /* Centraliza os elementos horizontalmente */
 }
 
-/* CENTRALIZA O TIMER E OS BOTÕES */
-#timer {
-    text-align: center;
-    /* Centraliza o texto do timer */
-    font-size: 20px;
-    /* Define o tamanho da fonte do timer */
-    padding-top: 10px;
-    /* Adiciona espaço acima do timer */
-}
-
+/* Estilos do timer e contador de erros */
+#timer,
 #errorCount {
-    margin-top: 10px;
-    /* Adiciona espaço acima do contador de erros */
     font-size: 20px;
-    /* Define o tamanho da fonte do contador de erros */
-    text-align: center;
-    /* Centraliza o texto do contador de erros */
+    /* Define o tamanho da fonte */
+    margin-top: 10px;
+    /* Adiciona um espaçamento superior */
 }
 
+/* Estilos do botão de reiniciar */
 button {
     margin-top: 10px;
-    /* Adiciona espaço acima dos botões */
+    /* Adiciona um espaçamento superior */
     padding: 10px 20px;
-    /* Define o padding interno dos botões */
+    /* Define o padding interno do botão */
     font-size: 16px;
-    /* Define o tamanho da fonte dos botões */
+    /* Define o tamanho da fonte */
     border: none;
-    /* Remove a borda dos botões */
+    /* Remove a borda */
     border-radius: 5px;
-    /* Arredonda os cantos dos botões */
+    /* Define cantos arredondados */
     background-color: #ababab;
-    /* Define a cor de fundo dos botões */
+    /* Define a cor de fundo do botão */
     color: white;
-    /* Define a cor do texto dos botões como branco */
+    /* Define a cor do texto do botão */
     cursor: pointer;
-    /* Altera o cursor ao passar o mouse sobre os botões */
+    /* Altera o cursor ao passar o mouse sobre o botão */
     transition: background-color 0.3s;
-    /* Transição suave ao mudar a cor de fundo */
+    /* Transição suave na mudança de cor do fundo */
 }
 
 button:hover {
     background-color: #ccc;
-    /* Muda a cor de fundo dos botões ao passar o mouse */
+    /* Muda a cor de fundo do botão ao passar o mouse */
 }
 
-/* CRIANDO O TABULEIRO */
+/* Estilos do tabuleiro do jogo */
 .board {
     display: grid;
     /* Usa grid layout para organizar as cartas */
@@ -167,12 +128,12 @@ button:hover {
     grid-template-rows: repeat(4, 100px);
     /* Define 4 linhas de 100px cada */
     gap: 10px;
-    /* Espaço entre as cartas */
+    /* Define um espaçamento entre as cartas */
     justify-content: center;
     /* Centraliza o grid horizontalmente */
 }
 
-/* ESTILIZANDO AS CARTAS */
+/* Estilos das cartas */
 .carta {
     width: 100px;
     /* Define a largura das cartas */
@@ -181,17 +142,15 @@ button:hover {
     background-color: #ccc;
     /* Define a cor de fundo das cartas */
     display: flex;
-    /* Usa Flexbox para centralizar o conteúdo da carta */
+    /* Usa flexbox para centralizar o conteúdo das cartas */
     justify-content: center;
-    /* Centraliza horizontalmente o conteúdo da carta */
+    /* Centraliza o conteúdo horizontalmente */
     align-items: center;
-    /* Centraliza verticalmente o conteúdo da carta */
+    /* Centraliza o conteúdo verticalmente */
     cursor: pointer;
     /* Altera o cursor ao passar o mouse sobre a carta */
-    font-size: 0;
-    /* Oculta o texto da carta */
     border-radius: 8px;
-    /* Arredonda os cantos das cartas */
+    /* Define cantos arredondados */
     transition: transform 0.10s ease;
     /* Transição suave ao aplicar transformações */
 }
@@ -209,7 +168,7 @@ button:hover {
     height: 100%;
     /* Define a altura da imagem como 100% da carta */
     border-radius: 8px;
-    /* Arredonda os cantos da imagem */
+    /* Define cantos arredondados para a imagem */
 }
 
 .carta.flipped img {
@@ -225,4 +184,39 @@ button:hover {
 .carta.errada {
     border: 2px solid red;
     /* Borda vermelha para cartas erradas */
+}
+
+/* Estilos da mensagem de vitória */
+#mensagemVitoria {
+    position: fixed;
+    /* Fixa a mensagem no centro da tela */
+    top: 50%;
+    /* Centraliza verticalmente */
+    left: 50%;
+    /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%);
+    /* Move o elemento para o centro exato da tela */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Define um fundo semitransparente */
+    color: white;
+    /* Define a cor do texto como branca */
+    padding: 20px;
+    /* Define o padding interno */
+    text-align: center;
+    /* Centraliza o texto */
+    border-radius: 10px;
+    /* Define cantos arredondados */
+    z-index: 1000;
+    /* Define um nível de empilhamento superior */
+    font-size: 20px;
+    /* Define o tamanho da fonte */
+}
+
+#contadorVitoria {
+    font-size: 24px;
+    /* Define o tamanho da fonte do contador */
+    font-weight: bold;
+    /* Define o peso da fonte como negrito */
+    margin-top: 10px;
+    /* Adiciona um espaçamento superior */
 }

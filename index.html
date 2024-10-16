@@ -1,29 +1,37 @@
 <!DOCTYPE html>
-<html lang="pt-br"> <!-- Define o tipo de documento e a língua como português do Brasil -->
+<html lang="pt-br"> <!-- Define a linguagem da página como português do Brasil -->
 
 <head>
     <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Responsivo, adapta a largura da página ao dispositivo -->
-    <title>UC02 - ATIVIDADE - JOGO DA MEMÓRIA</title> <!-- Título da página exibido na aba do navegador -->
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <!-- Link para o arquivo CSS que contém os estilos da página -->
+    <!-- Define a largura da página de acordo com o dispositivo -->
+    <title>UC02 - ATIVIDADE - JOGO DA MEMÓRIA</title>
+    <!-- Define o título da página que será exibido na aba do navegador -->
+    <link rel="stylesheet" href="./assets/css/style.css"> <!-- Link para o arquivo de estilos CSS -->
 </head>
 
 <body>
+    <!-- Estrutura do jogo -->
     <div id="root"> <!-- Div principal que contém toda a estrutura do jogo -->
         <div id="header"> <!-- Div para o cabeçalho do jogo -->
             <h1>Jogo da Memória</h1> <!-- Título do jogo -->
         </div>
-        <div id="body"> <!-- Div para o corpo do jogo, onde o tabuleiro será exibido -->
-            <div id="game" class="board"></div> <!-- Div que representa o tabuleiro do jogo -->
+        <div id="body"> <!-- Div para o corpo do jogo -->
+            <div id="game" class="board"></div> <!-- Div que representará o tabuleiro do jogo -->
         </div>
         <div id="footer"> <!-- Div para o rodapé do jogo -->
-            <p id="timer">Tempo: 0 Segundos</p> <!-- Exibe o tempo decorrido do jogo -->
-            <p id="errorCount">Erros: 0</p> <!-- Exibe o contador de erros -->
+            <p id="timer">Tempo: 0 Segundos</p> <!-- Exibe o tempo decorrido -->
+            <p id="errorCount">Erros: 0</p> <!-- Exibe o número de erros cometidos -->
             <button id="restartButton">Reiniciar</button> <!-- Botão para reiniciar o jogo -->
         </div>
     </div>
+
+    <!-- Div para exibir a mensagem de vitória e o contador -->
+    <div id="mensagemVitoria" style="display: none;"> <!-- Div que será exibida quando o jogo for concluído -->
+        <p id="textoVitoria"></p> <!-- Parágrafo onde será exibida a mensagem de vitória -->
+        <p id="contadorVitoria">5</p> <!-- Parágrafo onde será exibido o contador regressivo de 5 segundos -->
+    </div>
+
     <script src="./assets/script/script.js"></script>
     <!-- Link para o arquivo JavaScript que contém a lógica do jogo -->
 </body>

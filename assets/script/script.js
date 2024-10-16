@@ -1,123 +1,138 @@
-// MATRIZ COM AS IMAGENS
+// MATRIZ COM AS IMAGENS DAS CARTAS
 const images = [
     'w_7.png', 'w_8.png', 'w_10.png', 'w_11.png', 'w_95.png', 'w_98.png', 'w_Vista.png', 'w_XP.png',
     'w_7.png', 'w_8.png', 'w_10.png', 'w_11.png', 'w_95.png', 'w_98.png', 'w_Vista.png', 'w_XP.png'
 ];
 
-// VARIAVEIS DE CARTAS
+// VARIÁVEIS GLOBAIS DO JOGO
 let primeiraCarta, segundaCarta; // Variáveis para armazenar as cartas selecionadas
-let cartaVirada = false; // Controle para verificar se uma carta está virada
+let cartaVirada = false; // Controle para verificar se uma carta foi virada
 let jogoBloqueado = false; // Controle para bloquear cliques durante animações
 let paresEncontrado = 0; // Contador de pares encontrados
 let tempoInicial, contadorTempo; // Variáveis para controle de tempo
 let erroCount = 0; // Contador de erros
 let jogoConcluido = false; // Flag para verificar se o jogo foi concluído
 
-// APRESENTANDO A MATRIZ
-const board = document.getElementById('game');
+// ELEMENTOS DO DOM
+const board = document.getElementById('game'); // Elemento do tabuleiro
+const timerDisplay = document.getElementById('timer'); // Exibição do cronômetro
+const errorCountDisplay = document.getElementById('errorCount'); // Exibição do contador de erros
 
-// CONTADORES
-const timerDisplay = document.getElementById('timer');
-const errorCountDisplay = document.getElementById('errorCount'); // Contador de erros
-
-// FUNÇÃO PARA EMBARALHAR RANDOMICAMENTE
+// FUNÇÃO PARA EMBARALHAR AS IMAGENS
 function shuffle(array) {
-    return array.sort(() => Math.random() - 0.5);
+    return array.sort(() => Math.random() - 0.5); // Embaralha as imagens aleatoriamente
 }
 
-// FUNÇÃO QUE CRIA AS CARTAS
+// FUNÇÃO PARA CRIAR O TABULEIRO DO JOGO
 function createBoard() {
-    const shuffledImages = shuffle(images);
+    const shuffledImages = shuffle(images); // Embaralha as imagens
     shuffledImages.forEach(imgSrc => {
-        const carta = document.createElement('div');
-        carta.classList.add('carta');
-        carta.innerHTML = `<img src="./assets/img/png/${imgSrc}" alt="memory card">`;
-        carta.addEventListener('click', flipCard);
-        board.appendChild(carta);
+        const carta = document.createElement('div'); // Cria uma nova div para cada carta
+        carta.classList.add('carta'); // Adiciona a classe "carta"
+        carta.innerHTML = `<img src="./assets/img/png/${imgSrc}" alt="memory card">`; // Insere a imagem da carta
+        carta.addEventListener('click', flipCard); // Adiciona evento de clique para virar a carta
+        board.appendChild(carta); // Adiciona a carta ao tabuleiro
     });
 }
 
-// FUNÇÃO DO JOGO
+// FUNÇÃO PARA VIRAR A CARTA
 function flipCard() {
-    if (jogoBloqueado) return; // Bloqueia cliques durante animações
-    if (this === primeiraCarta) return; // Impede clicar na mesma carta
+    if (jogoBloqueado || this === primeiraCarta) return; // Bloqueia o clique se o jogo estiver bloqueado ou a carta for a mesma
 
-    this.classList.add('flipped'); // Vira a carta
+    this.classList.add('flipped'); // Adiciona a classe que vira a carta
 
-    if (!cartaVirada) {
+    if (!cartaVirada) { // Se ainda não houver uma carta virada
         cartaVirada = true; // Marca que uma carta foi virada
-        primeiraCarta = this; // Armazena a primeira carta
-        if (!tempoInicial) {
+        primeiraCarta = this; // Armazena a primeira carta virada
+        if (!tempoInicial) { // Se o cronômetro não começou ainda
             tempoInicial = new Date(); // Inicia o tempo
-            tempoInicialr(); // Chama a função para contar o tempo
+            startTimer(); // Inicia a função do cronômetro
         }
-        return;
+        return; // Sai da função
     }
 
-    segundaCarta = this; // Armazena a segunda carta
-    checkForMatch(); // Checa se as cartas são iguais
+    segundaCarta = this; // Armazena a segunda carta virada
+    checkForMatch(); // Verifica se as cartas combinam
 }
 
-// FUNÇÃO QUE COMPARA AS CARTAS
+// FUNÇÃO PARA VERIFICAR SE AS CARTAS SÃO IGUAIS
 function checkForMatch() {
-    if (primeiraCarta.innerHTML === segundaCarta.innerHTML) {
-        // Se as cartas são iguais
-        primeiraCarta.classList.add('certa'); // Adiciona borda verde
-        segundaCarta.classList.add('certa'); // Adiciona borda verde
-        disableCards(); // Desabilita as cartas
-        paresEncontrado++;
-        if (paresEncontrado === 8) {
-            endGame(); // Termina o jogo se todos os pares forem encontrados
+    if (primeiraCarta.innerHTML === segundaCarta.innerHTML) { // Se as cartas são iguais
+        primeiraCarta.classList.add('certa'); // Adiciona a classe "certa" à primeira carta
+        segundaCarta.classList.add('certa'); // Adiciona a classe "certa" à segunda carta
+        disableCards(); // Desabilita o clique nas cartas corretas
+        paresEncontrado++; // Incrementa o contador de pares encontrados
+        if (paresEncontrado === 8) { // Se todos os pares foram encontrados
+            endGame(); // Finaliza o jogo
         }
-    } else {
-        // Se as cartas são diferentes
+    } else { // Se as cartas não são iguais
         erroCount++; // Incrementa o contador de erros
-        errorCountDisplay.textContent = `Erros: ${erroCount}`; // Atualiza o display de erros
-        primeiraCarta.classList.add('errada'); // Adiciona borda vermelha
-        segundaCarta.classList.add('errada'); // Adiciona borda vermelha
-        unflipCards(); // Desvira as cartas após um tempo
+        errorCountDisplay.textContent = `Erros: ${erroCount}`; // Atualiza o contador de erros na tela
+        primeiraCarta.classList.add('errada'); // Adiciona a classe "errada" à primeira carta
+        segundaCarta.classList.add('errada'); // Adiciona a classe "errada" à segunda carta
+        unflipCards(); // Desvira as cartas erradas
     }
 }
 
-// FUNÇÃO PARA PARES NÃO ENCONTRADOS
+// FUNÇÃO PARA DESABILITAR AS CARTAS CORRETAS
 function disableCards() {
     primeiraCarta.removeEventListener('click', flipCard); // Remove o evento de clique da primeira carta
     segundaCarta.removeEventListener('click', flipCard); // Remove o evento de clique da segunda carta
     resetBoard(); // Reseta as variáveis de controle
 }
 
-// FUNÇÃO PARA INICIAR O JOGO
+// FUNÇÃO PARA DESVIRAR AS CARTAS ERRADAS
 function unflipCards() {
     jogoBloqueado = true; // Bloqueia novos cliques
-    setTimeout(() => {
-        primeiraCarta.classList.remove('flipped'); // Desvira a primeira carta
-        segundaCarta.classList.remove('flipped'); // Desvira a segunda carta
-        primeiraCarta.classList.remove('errada'); // Remove a borda vermelha
-        segundaCarta.classList.remove('errada'); // Remove a borda vermelha
+    setTimeout(() => { // Define um atraso para desvirar as cartas
+        primeiraCarta.classList.remove('flipped', 'errada'); // Remove as classes da primeira carta
+        segundaCarta.classList.remove('flipped', 'errada'); // Remove as classes da segunda carta
         resetBoard(); // Reseta as variáveis de controle
-    }, 500); // Espera meio segundo antes de desvirar
+    }, 500); // Atraso de meio segundo antes de desvirar
 }
 
-// FUNÇÃO PARA RESETAR O JOGO
+// FUNÇÃO PARA RESETAR AS VARIÁVEIS DO JOGO
 function resetBoard() {
-    [cartaVirada, jogoBloqueado] = [false, false]; // Reseta os estados das cartas
+    [cartaVirada, jogoBloqueado] = [false, false]; // Reseta as variáveis de controle
     [primeiraCarta, segundaCarta] = [null, null]; // Reseta as cartas selecionadas
 }
 
-// INICIAR O CONTADOR
-function tempoInicialr() {
-    contadorTempo = setInterval(() => {
-        const elapsedTime = Math.floor((new Date() - tempoInicial) / 1000); // Calcula o tempo decorrido
-        timerDisplay.textContent = `Tempo: ${elapsedTime}s`; // Atualiza o display de tempo
-    }, 1000);
+// FUNÇÃO PARA INICIAR O CRONÔMETRO
+function startTimer() {
+    contadorTempo = setInterval(() => { // Define o intervalo do cronômetro
+        const tempoDecorrido = Math.floor((new Date() - tempoInicial) / 1000); // Calcula o tempo decorrido
+        timerDisplay.textContent = `Tempo: ${tempoDecorrido}s`; // Atualiza o tempo na tela
+    }, 1000); // Atualiza o cronômetro a cada segundo
 }
 
-// FIM DO JOGO
+// FUNÇÃO PARA FINALIZAR O JOGO
 function endGame() {
-    clearInterval(contadorTempo); // Para o contador de tempo
+    clearInterval(contadorTempo); // Para o cronômetro
     jogoConcluido = true; // Marca o jogo como concluído
-    const elapsedTime = Math.floor((new Date() - tempoInicial) / 1000); // Calcula o tempo total
-    alert(`Parabéns! Você encontrou todos os pares!\nTempo: ${elapsedTime} segundos\nErros: ${erroCount}`); // Mostra mensagem de finalização
+    const tempoDecorrido = Math.floor((new Date() - tempoInicial) / 1000); // Calcula o tempo total
+
+    // Exibe a mensagem de vitória na tela
+    const mensagemVitoria = document.getElementById('mensagemVitoria'); // Seleciona a div da mensagem de vitória
+    const textoVitoria = document.getElementById('textoVitoria'); // Seleciona o parágrafo onde o texto será exibido
+    const contadorVitoria = document.getElementById('contadorVitoria'); // Seleciona o parágrafo onde o contador será exibido
+
+    textoVitoria.textContent = `Parabéns! Você encontrou todos os pares!\nTempo: ${tempoDecorrido} segundos\nErros: ${erroCount}`; // Insere a mensagem de vitória
+    mensagemVitoria.style.display = 'block'; // Exibe a div de vitória
+
+    // Cria o elemento de áudio
+    const audioVitoria = new Audio('./assets/sound/vitoria.mp3'); // Cria o elemento de áudio com o caminho do som
+    audioVitoria.play(); // Toca o áudio de vitória
+
+    // Inicia o contador regressivo de 5 segundos
+    let contador = 5; // Define o valor inicial do contador
+    const intervaloContador = setInterval(() => { // Define o intervalo para o contador
+        contador--; // Decrementa o valor do contador
+        contadorVitoria.textContent = contador; // Atualiza o contador na tela
+        if (contador === 0) { // Quando o contador chega a 0
+            clearInterval(intervaloContador); // Para o contador
+            mensagemVitoria.style.display = 'none'; // Esconde a div de vitória
+        }
+    }, 1000); // Atualiza o contador a cada segundo
 }
 
 // FUNÇÃO PARA REINICIAR O JOGO
@@ -125,18 +140,14 @@ function restartGame() {
     board.innerHTML = ''; // Limpa o tabuleiro
     paresEncontrado = 0; // Reseta o contador de pares encontrados
     erroCount = 0; // Reseta o contador de erros
-    errorCountDisplay.textContent = `Erros: ${erroCount}`; // Atualiza o display de erros
-    tempoInicial = null; // Reseta o tempo
-    clearInterval(contadorTempo); // Para o contador de tempo
-    timerDisplay.textContent = `Tempo: 0s`; // Reseta o display de tempo
-    cartaVirada = false; // Reseta o estado de carta virada
-    jogoBloqueado = false; // Reseta o estado de bloqueio
-    primeiraCarta = null; // Reseta a primeira carta
-    segundaCarta = null; // Reseta a segunda carta
-    createBoard(); // Cria um novo tabuleiro
+    errorCountDisplay.textContent = `Erros: ${erroCount}`; // Atualiza o contador de erros na tela
+    tempoInicial = null; // Reseta o tempo inicial
+    clearInterval(contadorTempo); // Para o cronômetro
+    timerDisplay.textContent = `Tempo: 0s`; // Reseta o cronômetro na tela
+    createBoard(); // Recria o tabuleiro
 }
 
-// EVENT LISTENERS PARA OS BOTÕES
-document.getElementById('restartButton').addEventListener('click', restartGame); // Adiciona evento de reiniciar
+// EVENTO PARA O BOTÃO DE REINICIAR
+document.getElementById('restartButton').addEventListener('click', restartGame); // Adiciona o evento de clique ao botão de reiniciar
 
 createBoard(); // Cria o tabuleiro inicialmente
