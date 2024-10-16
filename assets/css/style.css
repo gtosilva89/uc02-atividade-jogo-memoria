@@ -3,422 +3,338 @@
 *::before,
 *::after {
     box-sizing: border-box;
-    /* Inclui padding e borda no cálculo da largura/altura dos elementos */
 }
 
 * {
     margin: 0;
-    /* Remove margens de todos os elementos */
     padding: 0;
-    /* Remove padding de todos os elementos */
 }
 
 body {
     display: flex;
-    /* Usa flexbox para organizar os elementos filhos */
     justify-content: center;
-    /* Centraliza os elementos horizontalmente */
     align-items: center;
-    /* Centraliza os elementos verticalmente */
     height: 100vh;
-    /* Define a altura do body como 100% da altura da viewport */
     flex-direction: column;
-    /* Organiza os filhos em uma coluna */
 }
 
 /* Estilos da div principal do jogo */
 #root {
     width: 1000px;
-    /* Define a largura do container principal */
     height: auto;
-    /* Define a altura como automática para se ajustar ao conteúdo */
     padding: 20px;
-    /* Adiciona padding ao container principal */
     background-color: #f9f9f9;
-    /* Cor de fundo clara para o container principal */
     border-radius: 10px;
-    /* Cantos arredondados para o container principal */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    /* Sombra suave para efeito de profundidade */
 }
 
 /* Estilos do cabeçalho */
 #header {
     width: 100%;
-    /* Cabeçalho ocupa 100% da largura do container */
     text-align: center;
-    /* Centraliza o texto dentro do cabeçalho */
     font-size: 25px;
-    /* Define o tamanho da fonte do título */
 }
 
 #header h1 {
     color: black;
-    /* Define a cor do texto como preto */
     padding-top: 10px;
-    /* Adiciona um espaçamento superior */
 }
 
 /* Estilos do corpo do jogo */
 #body {
     margin-top: 20px;
-    /* Adiciona um espaço superior entre o cabeçalho e o corpo */
     width: 100%;
-    /* O corpo ocupa 100% da largura do container */
 }
 
 /* Estilos do tabuleiro */
 .board {
     display: grid;
-    /* Usa grid layout para organizar as cartas */
     grid-template-columns: repeat(4, 100px);
-    /* Define 4 colunas de 100px cada */
     grid-template-rows: repeat(4, 100px);
-    /* Define 4 linhas de 100px cada */
     gap: 10px;
-    /* Define um espaçamento entre as cartas */
     justify-content: center;
-    /* Centraliza o grid horizontalmente */
     margin: 0 auto;
-    /* Centraliza o grid dentro do container */
 }
 
 /* Estilos do rodapé */
 #footer {
     margin-top: 20px;
-    /* Adiciona um espaço superior entre o corpo e o rodapé */
     width: 100%;
-    /* O rodapé ocupa 100% da largura do container */
     display: flex;
-    /* Usa flexbox para organizar os elementos filhos */
     flex-direction: column;
-    /* Organiza os filhos em colunas */
     align-items: center;
-    /* Alinha os itens verticalmente ao centro */
 }
 
 /* Estilos para os status do jogo */
 #status {
     display: flex;
-    /* Usa flexbox para organizar os elementos de status em linha */
     justify-content: space-around;
-    /* Distribui os elementos igualmente ao longo do espaço */
+    flex-wrap: wrap;
+    /* Permite que os itens sejam quebrados em mais linhas */
     width: 100%;
-    /* O status ocupa 100% da largura do rodapé */
     max-width: 800px;
-    /* Limita a largura máxima do status para não esticar demais */
 }
 
-/* Estilos do timer, contador de erros, pontuação e tentativas */
 #timer,
 #errorCount,
 #score,
 #attempts {
     font-size: 20px;
-    /* Define o tamanho da fonte */
-    margin: 0 10px;
-    /* Adiciona um espaçamento horizontal entre os elementos */
+    margin: 10px;
     padding: 5px;
-    /* Adiciona um padding interno */
     border: 1px solid #ccc;
-    /* Adiciona uma borda sutil */
     border-radius: 5px;
-    /* Define cantos arredondados */
     background-color: rgba(255, 255, 255, 0.9);
-    /* Fundo branco semitransparente */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* Sombra suave para efeito de profundidade */
+    width: calc(50% - 20px);
+    /* Ocupa 50% da largura com margem ajustada */
 }
 
 /* Estilos para a seção de botões */
 #buttons {
     margin-top: 10px;
-    /* Adiciona um espaçamento superior antes dos botões */
     display: flex;
-    /* Usa flexbox para organizar os botões em linha */
+    flex-wrap: wrap;
+    /* Permite que os botões quebrem em mais linhas */
     justify-content: center;
-    /* Centraliza os botões horizontalmente */
 }
 
-/* Estilos do botão */
 button {
-    margin: 0 5px;
-    /* Adiciona um espaçamento horizontal entre os botões */
+    margin: 5px;
     padding: 10px 20px;
-    /* Define o padding interno do botão */
     font-size: 16px;
-    /* Define o tamanho da fonte */
     border: none;
-    /* Remove a borda */
     border-radius: 5px;
-    /* Define cantos arredondados */
     background-color: #ababab;
-    /* Define a cor de fundo do botão */
     color: white;
-    /* Define a cor do texto do botão */
     cursor: pointer;
-    /* Altera o cursor ao passar o mouse sobre o botão */
     transition: background-color 0.3s;
-    /* Transição suave na mudança de cor do fundo */
+    width: calc(50% - 20px);
+    /* Ocupa 50% da largura com margem ajustada */
 }
 
 button:hover {
     background-color: #ccc;
-    /* Muda a cor de fundo do botão ao passar o mouse */
-}
-
-/* Estilos do tabuleiro do jogo */
-.board {
-    display: grid;
-    /* Usa grid layout para organizar as cartas */
-    grid-template-columns: repeat(4, 100px);
-    /* Define 4 colunas de 100px cada */
-    grid-template-rows: repeat(4, 100px);
-    /* Define 4 linhas de 100px cada */
-    gap: 10px;
-    /* Define um espaçamento entre as cartas */
-    justify-content: center;
-    /* Centraliza o grid horizontalmente */
 }
 
 /* Estilos das cartas */
 .carta {
     width: 100px;
-    /* Define a largura das cartas */
     height: 100px;
-    /* Define a altura das cartas */
     background-color: #ccc;
-    /* Define a cor de fundo das cartas */
     display: flex;
-    /* Usa flexbox para centralizar o conteúdo das cartas */
     justify-content: center;
-    /* Centraliza o conteúdo horizontalmente */
     align-items: center;
-    /* Centraliza o conteúdo verticalmente */
     cursor: pointer;
-    /* Altera o cursor ao passar o mouse sobre a carta */
     border-radius: 8px;
-    /* Define cantos arredondados */
     transition: transform 0.10s ease;
-    /* Transição suave ao aplicar transformações */
 }
 
 .carta:hover {
     transform: scale(1.05);
-    /* Aumenta levemente o tamanho da carta ao passar o mouse */
 }
 
 .carta img {
     display: none;
-    /* Oculta a imagem inicialmente */
     width: 100%;
-    /* Define a largura da imagem como 100% da carta */
     height: 100%;
-    /* Define a altura da imagem como 100% da carta */
     border-radius: 8px;
-    /* Define cantos arredondados para a imagem */
 }
 
 .carta.flipped img {
     display: block;
-    /* Exibe a imagem quando a carta está virada */
 }
 
 .carta.certa {
     border: 2px solid green;
-    /* Borda verde para cartas corretas */
 }
 
 .carta.errada {
     border: 2px solid red;
-    /* Borda vermelha para cartas erradas */
 }
 
 /* Estilos para a div de vitória */
 #mensagemVitoria {
     position: fixed;
-    /* Fixa a div no centro da tela */
     top: 50%;
-    /* Centraliza verticalmente */
     left: 50%;
-    /* Centraliza horizontalmente */
     transform: translate(-50%, -50%);
-    /* Move o elemento para o centro exato da tela */
     background-color: rgba(255, 255, 255, 0.95);
-    /* Fundo branco semitransparente */
     color: black;
-    /* Cor do texto */
     padding: 20px;
-    /* Adiciona padding interno */
     border-radius: 10px;
-    /* Define cantos arredondados */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    /* Sombra suave para efeito de profundidade */
     z-index: 1000;
-    /* Define um nível de empilhamento superior */
     width: 400px;
-    /* Largura fixa para a div */
     max-height: 80%;
-    /* Define a altura máxima da div */
     overflow-y: auto;
-    /* Permite rolagem vertical se o conteúdo ultrapassar a altura máxima */
     text-align: center;
-    /* Alinha o texto ao centro */
-}
-
-.mensagem-container h2 {
-    margin-bottom: 10px;
-    /* Espaçamento inferior do título */
-}
-
-#contadorVitoria {
-    font-size: 24px;
-    /* Define o tamanho da fonte do contador */
-    font-weight: bold;
-    /* Define o peso da fonte como negrito */
-    margin-top: 10px;
-    /* Adiciona um espaçamento superior */
 }
 
 /* Estilos para a div das regras */
 #regras {
     position: fixed;
-    /* Fixa a div no centro da tela */
     top: 50%;
-    /* Centraliza verticalmente */
     left: 50%;
-    /* Centraliza horizontalmente */
     transform: translate(-50%, -50%);
-    /* Move o elemento para o centro exato da tela */
     background-color: rgba(255, 255, 255, 0.95);
-    /* Fundo branco semitransparente */
     color: black;
-    /* Cor do texto */
     padding: 20px;
-    /* Adiciona padding interno */
     border-radius: 10px;
-    /* Define cantos arredondados */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    /* Sombra suave para efeito de profundidade */
     z-index: 1000;
-    /* Define um nível de empilhamento superior */
     width: 500px;
-    /* Aumenta a largura da div */
     max-height: 80%;
-    /* Define a altura máxima da div */
     overflow-y: auto;
-    /* Permite rolagem vertical se o conteúdo ultrapassar a altura máxima */
     text-align: left;
-    /* Alinha o texto à esquerda */
 }
 
 .regras-container h2 {
     margin-bottom: 10px;
-    /* Espaçamento inferior do título */
 }
 
 .regras-container p,
 .regras-container ul {
     line-height: 1.5;
-    /* Define o espaçamento entre linhas */
-}
-
-.regras-container ul {
-    list-style-type: none;
-    /* Remove o estilo padrão da lista */
-    padding: 0;
-    /* Remove o padding */
-    margin: 0;
-    /* Remove a margem */
 }
 
 .regras-container button {
     margin-top: 15px;
-    /* Adiciona um espaçamento superior */
     padding: 10px 20px;
-    /* Define o padding interno do botão */
     font-size: 16px;
-    /* Define o tamanho da fonte */
     border: none;
-    /* Remove a borda */
     border-radius: 5px;
-    /* Define cantos arredondados */
     background-color: #ababab;
-    /* Define a cor de fundo do botão */
     color: white;
-    /* Define a cor do texto do botão */
     cursor: pointer;
-    /* Altera o cursor ao passar o mouse sobre o botão */
     transition: background-color 0.3s;
-    /* Transição suave na mudança de cor do fundo */
 }
 
 .regras-container button:hover {
     background-color: #ccc;
-    /* Muda a cor de fundo do botão ao passar o mouse */
 }
 
 /* Estilos para a div dos recordes */
 #recordes {
     position: fixed;
-    /* Fixa a div no centro da tela */
     top: 50%;
-    /* Centraliza verticalmente */
     left: 50%;
-    /* Centraliza horizontalmente */
     transform: translate(-50%, -50%);
-    /* Move o elemento para o centro exato da tela */
     background-color: rgba(255, 255, 255, 0.95);
-    /* Fundo branco semitransparente */
     color: black;
-    /* Cor do texto */
     padding: 20px;
-    /* Adiciona padding interno */
     border-radius: 10px;
-    /* Define cantos arredondados */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    /* Sombra suave para efeito de profundidade */
     z-index: 1000;
-    /* Define um nível de empilhamento superior */
     width: 400px;
-    /* Largura fixa para a div */
     max-height: 80%;
-    /* Define a altura máxima da div */
     overflow-y: auto;
-    /* Permite rolagem vertical se o conteúdo ultrapassar a altura máxima */
     text-align: left;
-    /* Alinha o texto à esquerda */
 }
 
 .recordes-container h2 {
     margin-bottom: 10px;
-    /* Espaçamento inferior do título */
 }
 
 .recordes-container button,
 .regras-container button {
     margin-top: 15px;
-    /* Adiciona um espaçamento superior */
     padding: 10px 20px;
-    /* Define o padding interno do botão */
     font-size: 16px;
-    /* Define o tamanho da fonte */
     border: none;
-    /* Remove a borda */
     border-radius: 5px;
-    /* Define cantos arredondados */
     background-color: #ababab;
-    /* Define a cor de fundo do botão */
     color: white;
-    /* Define a cor do texto do botão */
     cursor: pointer;
-    /* Altera o cursor ao passar o mouse sobre o botão */
     transition: background-color 0.3s;
-    /* Transição suave na mudança de cor do fundo */
 }
 
 .recordes-container button:hover,
 .regras-container button:hover {
     background-color: #ccc;
-    /* Muda a cor de fundo do botão ao passar o mouse */
+}
+
+/* RESPONSIVIDADE */
+
+/* Mobile L (425px ou menos) */
+@media (max-width: 425px) {
+    #root {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .board {
+        grid-template-columns: repeat(2, 1fr);
+        /* Altera para 2 colunas no grid */
+        gap: 3px;
+        /* Reduz o espaço entre as cartas ao mínimo */
+    }
+
+    .carta {
+        width: 70px;
+        /* Reduz o tamanho das cartas */
+        height: 70px;
+        /* Reduz o tamanho das cartas */
+    }
+
+    #status {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    #buttons {
+        flex-wrap: wrap;
+        /* Organiza os botões em duas linhas */
+    }
+
+    #mensagemVitoria,
+    #regras,
+    #recordes {
+        width: 90%;
+    }
+}
+
+/* Tablet (768px ou menos) */
+@media (max-width: 768px) {
+    #root {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .board {
+        grid-template-columns: repeat(3, 1fr);
+        /* Altera para 3 colunas no grid */
+        gap: 10px;
+    }
+
+    .carta {
+        width: 90px;
+        height: 90px;
+    }
+
+    #status {
+        max-width: 600px;
+    }
+}
+
+/* Laptop (1024px ou menos) */
+@media (max-width: 1024px) {
+    #root {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .board {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+    }
+
+    .carta {
+        width: 100px;
+        height: 100px;
+    }
+
+    #status {
+        max-width: 800px;
+    }
 }
