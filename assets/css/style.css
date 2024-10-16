@@ -73,14 +73,24 @@ body {
     /* Adiciona um espaço superior entre o corpo e o rodapé */
     width: 100%;
     /* O rodapé ocupa 100% da largura do container */
-    height: 10%;
-    /* Define a altura do rodapé como 10% do container */
     display: flex;
     /* Usa flexbox para organizar os elementos filhos */
     flex-direction: column;
-    /* Organiza os filhos em uma coluna */
+    /* Organiza os filhos em colunas */
     align-items: center;
-    /* Centraliza os elementos horizontalmente */
+    /* Alinha os itens verticalmente ao centro */
+}
+
+/* Estilos para os status do jogo */
+#status {
+    display: flex;
+    /* Usa flexbox para organizar os elementos de status em linha */
+    justify-content: space-between;
+    /* Distribui os elementos igualmente ao longo do espaço */
+    width: 100%;
+    /* O status ocupa 100% da largura do rodapé */
+    max-width: 800px;
+    /* Limita a largura máxima do status para não esticar demais */
 }
 
 /* Estilos do timer, contador de erros, pontuação e tentativas */
@@ -90,14 +100,34 @@ body {
 #attempts {
     font-size: 20px;
     /* Define o tamanho da fonte */
-    margin-top: 10px;
-    /* Adiciona um espaçamento superior */
+    margin: 0 10px;
+    /* Adiciona um espaçamento horizontal entre os elementos */
+    padding: 5px;
+    /* Adiciona um padding interno */
+    border: 1px solid #ccc;
+    /* Adiciona uma borda sutil */
+    border-radius: 5px;
+    /* Define cantos arredondados */
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Fundo branco semitransparente */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Sombra suave para efeito de profundidade */
 }
 
-/* Estilos do botão de reiniciar */
-button {
+/* Estilos para a seção de botões */
+#buttons {
     margin-top: 10px;
-    /* Adiciona um espaçamento superior */
+    /* Adiciona um espaçamento superior antes dos botões */
+    display: flex;
+    /* Usa flexbox para organizar os botões em linha */
+    justify-content: center;
+    /* Centraliza os botões horizontalmente */
+}
+
+/* Estilos do botão */
+button {
+    margin: 0 5px;
+    /* Adiciona um espaçamento horizontal entre os botões */
     padding: 10px 20px;
     /* Define o padding interno do botão */
     font-size: 16px;
