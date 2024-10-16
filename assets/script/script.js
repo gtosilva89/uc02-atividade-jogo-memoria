@@ -7,13 +7,14 @@ const images = [
 // VARIÁVEIS GLOBAIS DO JOGO
 let primeiraCarta, segundaCarta; // Variáveis para armazenar as cartas selecionadas
 let cartaVirada = false; // Controle para verificar se uma carta foi virada
-let jogoBloqueado = false; // Controle para bloquear cliques durante animações
+let jogoBloqueado = true; // Controle para bloquear cliques antes de iniciar o jogo
 let paresEncontrado = 0; // Contador de pares encontrados
 let tempoInicial, contadorTempo; // Variáveis para controle de tempo
 let erroCount = 0; // Contador de erros
 let jogoConcluido = false; // Flag para verificar se o jogo foi concluído
 let pontuacao = 0; // Variável para armazenar a pontuação do jogador
 let tentativas = 0; // Variável para armazenar o número de tentativas
+let jogadorNome = ""; // Variável para armazenar o nome do jogador
 
 // ELEMENTOS DO DOM
 const board = document.getElementById('game'); // Elemento do tabuleiro
@@ -44,6 +45,11 @@ function createBoard() {
 
 // FUNÇÃO PARA VIRAR A CARTA
 function flipCard() {
+    if (jogoBloqueado) { // Se o jogo estiver bloqueado, exibe um alerta
+        alert("Você deve primeiro clicar em 'Iniciar' e inserir seu nome."); // Alerta se o jogador tentar virar uma carta sem iniciar
+        return; // Sai da função
+    }
+
     if (jogoBloqueado || this === primeiraCarta) return; // Bloqueia o clique se o jogo estiver bloqueado ou a carta for a mesma
 
     this.classList.add('flipped'); // Adiciona a classe que vira a carta
@@ -121,12 +127,49 @@ function resetBoard() {
     [primeiraCarta, segundaCarta] = [null, null]; // Reseta as cartas selecionadas
 }
 
-// FUNÇÃO PARA INICIAR O CRONÔMETRO
-function startTimer() {
-    contadorTempo = setInterval(() => { // Define o intervalo do cronômetro
-        const tempoDecorrido = Math.floor((new Date() - tempoInicial) / 1000); // Calcula o tempo decorrido
-        timerDisplay.textContent = `Tempo: ${tempoDecorrido}s`; // Atualiza o tempo na tela
-    }, 1000); // Atualiza o cronômetro a cada segundo
+// FUNÇÃO PARA INICIAR O JOGO
+function startGame() {
+    // Solicita o nome do jogador
+    jogadorNome = prompt("Por favor, insira seu nome:"); // Solicita ao usuário que insira seu nome
+    if (!jogadorNome) { // Verifica se o nome foi fornecido
+        alert("O nome do jogador é obrigatório!"); // Exibe um alerta se o nome não for fornecido
+        return; // Interrompe a execução se o nome não for fornecido
+    }
+
+    resetGame(); // Reinicia o jogo
+
+    // Mostra as cartas por 1.5 segundos
+    setTimeout(() => {
+        board.childNodes.forEach(carta => carta.classList.add('flipped')); // Vira todas as cartas para mostrar as imagens
+    }, 100); // Atraso de 0.1 segundos para garantir que a animação de virar as cartas funcione corretamente
+
+    setTimeout(() => {
+        board.childNodes.forEach(carta => carta.classList.remove('flipped')); // Desvira todas as cartas após 1.5 segundos
+        jogoBloqueado = false; // Permite que as cartas sejam viradas após o tempo
+    }, 1500); // Tempo de 1.5 segundos para mostrar as cartas
+}
+
+// FUNÇÃO PARA RESETAR O JOGO
+function resetGame() {
+    // Limpa o tabuleiro e reinicia todas as variáveis do jogo
+    board.innerHTML = ''; // Limpa o tabuleiro
+    paresEncontrado = 0; // Reseta o contador de pares encontrados
+    erroCount = 0; // Reseta o contador de erros
+    pontuacao = 0; // Reseta a pontuação
+    tentativas = 0; // Reseta o contador de tentativas
+    cartaVirada = false; // Reseta o estado de carta virada
+    primeiraCarta = null; // Reseta a primeira carta
+    segundaCarta = null; // Reseta a segunda carta
+    jogoBloqueado = true; // Bloqueia o jogo para novas tentativas
+    tempoInicial = null; // Reseta o tempo inicial
+
+    // Atualiza as exibições na tela
+    errorCountDisplay.textContent = `Erros: ${erroCount}`; // Atualiza o contador de erros na tela
+    scoreDisplay.textContent = `Pontuação: ${pontuacao}`; // Atualiza a pontuação na tela
+    attemptsDisplay.textContent = `Tentativas: ${tentativas}`; // Atualiza o contador de tentativas na tela
+    timerDisplay.textContent = `Tempo: 0s`; // Reseta o cronômetro na tela
+    clearInterval(contadorTempo); // Para o cronômetro
+    createBoard(); // Recria o tabuleiro
 }
 
 // FUNÇÃO PARA FINALIZAR O JOGO
@@ -140,8 +183,8 @@ function endGame() {
     const textoVitoria = document.getElementById('textoVitoria'); // Seleciona o parágrafo onde o texto será exibido
     const contadorVitoria = document.getElementById('contadorVitoria'); // Seleciona o parágrafo onde o contador será exibido
 
-    // Insere a mensagem de vitória com tempo, erros e pontuação
-    textoVitoria.textContent = `Parabéns! Você encontrou todos os pares!\nTempo: ${tempoDecorrido} segundos\nErros: ${erroCount}\nPontuação: ${pontuacao}`;
+    // Insere a mensagem de vitória com tempo, erros, pontuação e nome do jogador
+    textoVitoria.textContent = `Parabéns, ${jogadorNome}! Você encontrou todos os pares!\nTempo: ${tempoDecorrido} segundos\nErros: ${erroCount}\nPontuação: ${pontuacao}\nContinue assim e melhore a cada jogada!`;
     mensagemVitoria.style.display = 'block'; // Exibe a div de vitória
 
     // Cria o elemento de áudio
@@ -160,30 +203,8 @@ function endGame() {
     }, 1000); // Atualiza o contador a cada segundo
 }
 
-// FUNÇÃO PARA REINICIAR O JOGO
-function restartGame() {
-    // Limpa o tabuleiro e reinicia todas as variáveis do jogo
-    board.innerHTML = ''; // Limpa o tabuleiro
-    paresEncontrado = 0; // Reseta o contador de pares encontrados
-    erroCount = 0; // Reseta o contador de erros
-    pontuacao = 0; // Reseta a pontuação
-    tentativas = 0; // Reseta o contador de tentativas
-    cartaVirada = false; // Reseta o estado de carta virada
-    primeiraCarta = null; // Reseta a primeira carta
-    segundaCarta = null; // Reseta a segunda carta
-    jogoBloqueado = false; // Desbloqueia o jogo para novas tentativas
-    tempoInicial = null; // Reseta o tempo inicial
-
-    // Atualiza as exibições na tela
-    errorCountDisplay.textContent = `Erros: ${erroCount}`; // Atualiza o contador de erros na tela
-    scoreDisplay.textContent = `Pontuação: ${pontuacao}`; // Atualiza a pontuação na tela
-    attemptsDisplay.textContent = `Tentativas: ${tentativas}`; // Atualiza o contador de tentativas na tela
-    timerDisplay.textContent = `Tempo: 0s`; // Reseta o cronômetro na tela
-    clearInterval(contadorTempo); // Para o cronômetro
-    createBoard(); // Recria o tabuleiro
-}
-
-// EVENTO PARA O BOTÃO DE REINICIAR
-document.getElementById('restartButton').addEventListener('click', restartGame); // Adiciona o evento de clique ao botão de reiniciar
+// EVENTOS PARA OS BOTÕES
+document.getElementById('startButton').addEventListener('click', startGame); // Adiciona o evento de clique ao botão de iniciar
+document.getElementById('restartButton').addEventListener('click', resetGame); // Adiciona o evento de clique ao botão de reiniciar
 
 createBoard(); // Cria o tabuleiro inicialmente

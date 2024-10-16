@@ -30,16 +30,22 @@ body {
 #root {
     width: 1000px;
     /* Define a largura do container principal */
-    height: 90vh;
-    /* Define a altura do container como 90% da altura da viewport */
+    height: auto;
+    /* Define a altura como automática para se ajustar ao conteúdo */
+    padding: 20px;
+    /* Adiciona padding ao container principal */
+    background-color: #f9f9f9;
+    /* Cor de fundo clara para o container principal */
+    border-radius: 10px;
+    /* Cantos arredondados para o container principal */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Sombra suave para efeito de profundidade */
 }
 
 /* Estilos do cabeçalho */
 #header {
     width: 100%;
     /* Cabeçalho ocupa 100% da largura do container */
-    height: 10%;
-    /* Define a altura do cabeçalho como 10% do container */
     text-align: center;
     /* Centraliza o texto dentro do cabeçalho */
     font-size: 25px;
@@ -55,21 +61,31 @@ body {
 
 /* Estilos do corpo do jogo */
 #body {
-    margin-top: 5px;
+    margin-top: 20px;
     /* Adiciona um espaço superior entre o cabeçalho e o corpo */
     width: 100%;
     /* O corpo ocupa 100% da largura do container */
-    height: auto;
-    /* A altura se ajusta automaticamente ao conteúdo */
-    padding-bottom: 10px;
-    /* Adiciona um espaçamento inferior */
-    padding-top: 10px;
-    /* Adiciona um espaçamento superior */
+}
+
+/* Estilos do tabuleiro */
+.board {
+    display: grid;
+    /* Usa grid layout para organizar as cartas */
+    grid-template-columns: repeat(4, 100px);
+    /* Define 4 colunas de 100px cada */
+    grid-template-rows: repeat(4, 100px);
+    /* Define 4 linhas de 100px cada */
+    gap: 10px;
+    /* Define um espaçamento entre as cartas */
+    justify-content: center;
+    /* Centraliza o grid horizontalmente */
+    margin: 0 auto;
+    /* Centraliza o grid dentro do container */
 }
 
 /* Estilos do rodapé */
 #footer {
-    margin-top: 5px;
+    margin-top: 20px;
     /* Adiciona um espaço superior entre o corpo e o rodapé */
     width: 100%;
     /* O rodapé ocupa 100% da largura do container */
@@ -85,7 +101,7 @@ body {
 #status {
     display: flex;
     /* Usa flexbox para organizar os elementos de status em linha */
-    justify-content: space-between;
+    justify-content: space-around;
     /* Distribui os elementos igualmente ao longo do espaço */
     width: 100%;
     /* O status ocupa 100% da largura do rodapé */
