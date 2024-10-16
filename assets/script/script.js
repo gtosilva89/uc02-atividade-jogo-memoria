@@ -162,17 +162,24 @@ function endGame() {
 
 // FUNÇÃO PARA REINICIAR O JOGO
 function restartGame() {
+    // Limpa o tabuleiro e reinicia todas as variáveis do jogo
     board.innerHTML = ''; // Limpa o tabuleiro
     paresEncontrado = 0; // Reseta o contador de pares encontrados
     erroCount = 0; // Reseta o contador de erros
     pontuacao = 0; // Reseta a pontuação
     tentativas = 0; // Reseta o contador de tentativas
+    cartaVirada = false; // Reseta o estado de carta virada
+    primeiraCarta = null; // Reseta a primeira carta
+    segundaCarta = null; // Reseta a segunda carta
+    jogoBloqueado = false; // Desbloqueia o jogo para novas tentativas
+    tempoInicial = null; // Reseta o tempo inicial
+
+    // Atualiza as exibições na tela
     errorCountDisplay.textContent = `Erros: ${erroCount}`; // Atualiza o contador de erros na tela
     scoreDisplay.textContent = `Pontuação: ${pontuacao}`; // Atualiza a pontuação na tela
     attemptsDisplay.textContent = `Tentativas: ${tentativas}`; // Atualiza o contador de tentativas na tela
-    tempoInicial = null; // Reseta o tempo inicial
-    clearInterval(contadorTempo); // Para o cronômetro
     timerDisplay.textContent = `Tempo: 0s`; // Reseta o cronômetro na tela
+    clearInterval(contadorTempo); // Para o cronômetro
     createBoard(); // Recria o tabuleiro
 }
 
