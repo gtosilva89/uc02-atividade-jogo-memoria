@@ -203,6 +203,45 @@ function endGame() {
     }, 1000); // Atualiza o contador a cada segundo
 }
 
+// FUNÇÃO PARA MOSTRAR AS // FUNÇÃO PARA MOSTRAR AS REGRAS
+function showRules() {
+    const regrasDiv = document.getElementById('regras'); // Seleciona a div de regras
+    const regrasContent = document.getElementById('regrasContent'); // Seleciona o contêiner das regras
+
+    // Define as regras do jogo
+    const regrasTexto = `
+    <p>Bem-vindo ao Jogo da Memória! Aqui estão as regras:</p>
+    <ul>
+        <li>O objetivo do jogo é encontrar todos os pares de cartas.</li>
+        <li>Clique no botão "Iniciar" e insira seu nome para começar.</li>
+        <li>As cartas serão mostradas por 1.5 segundos ao início do jogo.</li>
+        <li>Após o tempo, as cartas serão viradas novamente.</li>
+        <li>Em cada turno, você pode virar duas cartas.</li>
+        <li>Se as cartas forem iguais, elas permanecerão viradas.</li>
+        <li>Se não forem iguais, elas serão viradas novamente após um breve atraso.</li>
+        <li>Você ganhará pontos com base em quantas tentativas você levou para encontrar um par.</li>
+        <li>O jogo termina quando todos os pares forem encontrados.</li>
+        <li>Tente completar o jogo com o menor número de erros e tentativas!</li>
+    </ul>`;
+
+    regrasContent.innerHTML = regrasTexto; // Insere as regras na div
+    regrasDiv.style.display = 'block'; // Exibe a div de regras
+
+    // Define um temporizador para esconder as regras após 10 segundos
+    setTimeout(() => {
+        regrasDiv.style.display = 'none'; // Esconde a div de regras após 10 segundos
+    }, 10000); // 10 segundos
+}
+
+// Evento para o botão de regras
+document.getElementById('rulesButton').addEventListener('click', showRules); // Adiciona o evento de clique ao botão de regras
+
+// Evento para o botão de fechar as regras
+document.getElementById('closeRulesButton').addEventListener('click', () => {
+    const regrasDiv = document.getElementById('regras'); // Seleciona a div de regras
+    regrasDiv.style.display = 'none'; // Esconde a div de regras ao clicar no botão de fechar
+});
+
 // EVENTOS PARA OS BOTÕES
 document.getElementById('startButton').addEventListener('click', startGame); // Adiciona o evento de clique ao botão de iniciar
 document.getElementById('restartButton').addEventListener('click', resetGame); // Adiciona o evento de clique ao botão de reiniciar

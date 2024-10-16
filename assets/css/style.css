@@ -268,3 +268,81 @@ button:hover {
     margin-top: 10px;
     /* Adiciona um espaçamento superior */
 }
+
+/* Estilos para a div das regras */
+#regras {
+    position: fixed;
+    /* Fixa a div no centro da tela */
+    top: 50%;
+    /* Centraliza verticalmente */
+    left: 50%;
+    /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%);
+    /* Move o elemento para o centro exato da tela */
+    background-color: rgba(255, 255, 255, 0.95);
+    /* Fundo branco semitransparente */
+    color: black;
+    /* Cor do texto */
+    padding: 20px;
+    /* Adiciona padding interno */
+    border-radius: 10px;
+    /* Define cantos arredondados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Sombra suave para efeito de profundidade */
+    z-index: 1000;
+    /* Define um nível de empilhamento superior */
+    width: 500px;
+    /* Aumenta a largura da div */
+    max-height: 80%;
+    /* Define a altura máxima da div */
+    overflow-y: auto;
+    /* Permite rolagem vertical se o conteúdo ultrapassar a altura máxima */
+    text-align: left;
+    /* Alinha o texto à esquerda */
+}
+
+.regras-container h2 {
+    margin-bottom: 10px;
+    /* Espaçamento inferior do título */
+}
+
+.regras-container p,
+.regras-container ul {
+    line-height: 1.5;
+    /* Define o espaçamento entre linhas */
+}
+
+.regras-container ul {
+    list-style-type: none;
+    /* Remove o estilo padrão da lista */
+    padding: 0;
+    /* Remove o padding */
+    margin: 0;
+    /* Remove a margem */
+}
+
+.regras-container button {
+    margin-top: 15px;
+    /* Adiciona um espaçamento superior */
+    padding: 10px 20px;
+    /* Define o padding interno do botão */
+    font-size: 16px;
+    /* Define o tamanho da fonte */
+    border: none;
+    /* Remove a borda */
+    border-radius: 5px;
+    /* Define cantos arredondados */
+    background-color: #ababab;
+    /* Define a cor de fundo do botão */
+    color: white;
+    /* Define a cor do texto do botão */
+    cursor: pointer;
+    /* Altera o cursor ao passar o mouse sobre o botão */
+    transition: background-color 0.3s;
+    /* Transição suave na mudança de cor do fundo */
+}
+
+.regras-container button:hover {
+    background-color: #ccc;
+    /* Muda a cor de fundo do botão ao passar o mouse */
+}
