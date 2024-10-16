@@ -5,8 +5,7 @@
     <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Define a largura da página de acordo com o dispositivo -->
-    <title>UC02 - ATIVIDADE - JOGO DA MEMÓRIA</title>
-    <!-- Define o título da página que será exibido na aba do navegador -->
+    <title>Jogo da Memória</title> <!-- Define o título da página que será exibido na aba do navegador -->
     <link rel="stylesheet" href="./assets/css/style.css"> <!-- Link para o arquivo de estilos CSS -->
 </head>
 
@@ -47,6 +46,15 @@
             <h2>Regras do Jogo da Memória</h2> <!-- Título das regras -->
             <div id="regrasContent"></div> <!-- Div que será preenchida com as regras via JavaScript -->
             <button id="closeRulesButton">Fechar</button> <!-- Botão para fechar as regras -->
+        </div>
+    </div>
+
+    <!-- Div para exibir os recordes do jogo -->
+    <div id="recordes" style="display: none;"> <!-- Div que será exibida quando o botão de recordes for clicado -->
+        <div class="recordes-container"> <!-- Contêiner para o conteúdo dos recordes -->
+            <h2>Ranking dos Recordes</h2> <!-- Título dos recordes -->
+            <div id="recordesContent"></div> <!-- Div que será preenchida com os recordes via JavaScript -->
+            <button id="closeRecordsButton">Fechar</button> <!-- Botão para fechar os recordes -->
         </div>
     </div>
 

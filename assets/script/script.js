@@ -16,6 +16,9 @@ let pontuacao = 0; // Variável para armazenar a pontuação do jogador
 let tentativas = 0; // Variável para armazenar o número de tentativas
 let jogadorNome = ""; // Variável para armazenar o nome do jogador
 
+// ARRAY PARA ARMAZENAR OS RECORDES
+let recordes = []; // Array que armazenará os recordes dos jogadores
+
 // ELEMENTOS DO DOM
 const board = document.getElementById('game'); // Elemento do tabuleiro
 const timerDisplay = document.getElementById('timer'); // Exibição do cronômetro
@@ -178,6 +181,9 @@ function endGame() {
     jogoConcluido = true; // Marca o jogo como concluído
     const tempoDecorrido = Math.floor((new Date() - tempoInicial) / 1000); // Calcula o tempo total
 
+    // Adiciona o recorde ao array de recordes
+    addRecord(jogadorNome, pontuacao, tempoDecorrido); // Adiciona o recorde do jogador
+
     // Exibe a mensagem de vitória na tela
     const mensagemVitoria = document.getElementById('mensagemVitoria'); // Seleciona a div da mensagem de vitória
     const textoVitoria = document.getElementById('textoVitoria'); // Seleciona o parágrafo onde o texto será exibido
@@ -203,7 +209,17 @@ function endGame() {
     }, 1000); // Atualiza o contador a cada segundo
 }
 
-// FUNÇÃO PARA MOSTRAR AS // FUNÇÃO PARA MOSTRAR AS REGRAS
+// FUNÇÃO PARA ADICIONAR UM REGISTRO
+function addRecord(nome, pontuacao, tempo) {
+    // Adiciona o recorde ao array e mantém apenas os 20 melhores
+    recordes.push({ nome: nome, pontuacao: pontuacao, tempo: tempo }); // Adiciona o recorde
+    recordes.sort((a, b) => b.pontuacao - a.pontuacao); // Ordena os recordes pela pontuação (decrescente)
+    if (recordes.length > 20) { // Se o número de recordes for maior que 20
+        recordes = recordes.slice(0, 20); // Mantém apenas os 20 melhores
+    }
+}
+
+// FUNÇÃO PARA MOSTRAR AS REGRAS
 function showRules() {
     const regrasDiv = document.getElementById('regras'); // Seleciona a div de regras
     const regrasContent = document.getElementById('regrasContent'); // Seleciona o contêiner das regras
@@ -233,6 +249,24 @@ function showRules() {
     }, 10000); // 10 segundos
 }
 
+// FUNÇÃO PARA MOSTRAR OS RECORDES
+function showRecords() {
+    const recordesDiv = document.getElementById('recordes'); // Seleciona a div de recordes
+    const recordesContent = document.getElementById('recordesContent'); // Seleciona o contêiner dos recordes
+
+    // Limpa o conteúdo anterior
+    recordesContent.innerHTML = '';
+
+    // Exibe os recordes
+    recordes.forEach((recorde, index) => {
+        const recordeElement = document.createElement('p'); // Cria um novo parágrafo para cada recorde
+        recordeElement.textContent = `${index + 1}. ${recorde.nome} - Pontuação: ${recorde.pontuacao} - Tempo: ${recorde.tempo} segundos`; // Formata o texto do recorde
+        recordesContent.appendChild(recordeElement); // Adiciona o parágrafo ao contêiner de recordes
+    });
+
+    recordesDiv.style.display = 'block'; // Exibe a div de recordes
+}
+
 // Evento para o botão de regras
 document.getElementById('rulesButton').addEventListener('click', showRules); // Adiciona o evento de clique ao botão de regras
 
@@ -240,6 +274,15 @@ document.getElementById('rulesButton').addEventListener('click', showRules); // 
 document.getElementById('closeRulesButton').addEventListener('click', () => {
     const regrasDiv = document.getElementById('regras'); // Seleciona a div de regras
     regrasDiv.style.display = 'none'; // Esconde a div de regras ao clicar no botão de fechar
+});
+
+// Evento para o botão de recordes
+document.getElementById('recordsButton').addEventListener('click', showRecords); // Adiciona o evento de clique ao botão de recordes
+
+// Evento para o botão de fechar os recordes
+document.getElementById('closeRecordsButton').addEventListener('click', () => {
+    const recordesDiv = document.getElementById('recordes'); // Seleciona a div de recordes
+    recordesDiv.style.display = 'none'; // Esconde a div de recordes ao clicar no botão de fechar
 });
 
 // EVENTOS PARA OS BOTÕES
