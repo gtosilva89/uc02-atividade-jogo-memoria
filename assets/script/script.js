@@ -17,7 +17,7 @@ let tentativas = 0; // Variável para armazenar o número de tentativas
 let jogadorNome = ""; // Variável para armazenar o nome do jogador
 
 // ARRAY PARA ARMAZENAR OS RECORDES
-let recordes = []; // Array que armazenará os recordes dos jogadores
+let recordes = JSON.parse(localStorage.getItem('recordes')) || []; // Carrega os recordes do Local Storage ou inicia vazio
 
 // ELEMENTOS DO DOM
 const board = document.getElementById('game'); // Elemento do tabuleiro
@@ -231,6 +231,7 @@ function addRecord(nome, pontuacao, tempo) {
     if (recordes.length > 20) { // Se o número de recordes for maior que 20
         recordes = recordes.slice(0, 20); // Mantém apenas os 20 melhores
     }
+    localStorage.setItem('recordes', JSON.stringify(recordes)); // Armazena os recordes no Local Storage
 }
 
 // FUNÇÃO PARA MOSTRAR AS REGRAS
