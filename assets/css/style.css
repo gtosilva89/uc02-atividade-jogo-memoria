@@ -234,30 +234,41 @@ button:hover {
     /* Borda vermelha para cartas erradas */
 }
 
-/* Estilos da mensagem de vitória */
+/* Estilos para a div de vitória */
 #mensagemVitoria {
     position: fixed;
-    /* Fixa a mensagem no centro da tela */
+    /* Fixa a div no centro da tela */
     top: 50%;
     /* Centraliza verticalmente */
     left: 50%;
     /* Centraliza horizontalmente */
     transform: translate(-50%, -50%);
     /* Move o elemento para o centro exato da tela */
-    background-color: rgba(0, 0, 0, 0.8);
-    /* Define um fundo semitransparente */
-    color: white;
-    /* Define a cor do texto como branca */
+    background-color: rgba(255, 255, 255, 0.95);
+    /* Fundo branco semitransparente */
+    color: black;
+    /* Cor do texto */
     padding: 20px;
-    /* Define o padding interno */
-    text-align: center;
-    /* Centraliza o texto */
+    /* Adiciona padding interno */
     border-radius: 10px;
     /* Define cantos arredondados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Sombra suave para efeito de profundidade */
     z-index: 1000;
     /* Define um nível de empilhamento superior */
-    font-size: 20px;
-    /* Define o tamanho da fonte */
+    width: 400px;
+    /* Largura fixa para a div */
+    max-height: 80%;
+    /* Define a altura máxima da div */
+    overflow-y: auto;
+    /* Permite rolagem vertical se o conteúdo ultrapassar a altura máxima */
+    text-align: center;
+    /* Alinha o texto ao centro */
+}
+
+.mensagem-container h2 {
+    margin-bottom: 10px;
+    /* Espaçamento inferior do título */
 }
 
 #contadorVitoria {

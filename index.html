@@ -34,10 +34,12 @@
         </div>
     </div>
 
-    <!-- Div para exibir a mensagem de vitória e o contador -->
+    <!-- Div para exibir a mensagem de vitória -->
     <div id="mensagemVitoria" style="display: none;"> <!-- Div que será exibida quando o jogo for concluído -->
-        <p id="textoVitoria"></p> <!-- Parágrafo onde será exibida a mensagem de vitória -->
-        <p id="contadorVitoria">5</p> <!-- Parágrafo onde será exibido o contador regressivo de 5 segundos -->
+        <div class="mensagem-container"> <!-- Contêiner para a mensagem de vitória -->
+            <p id="textoVitoria"></p> <!-- Parágrafo onde será exibida a mensagem de vitória -->
+            <button id="closeVictoryButton">Fechar</button> <!-- Botão para fechar a mensagem de vitória -->
+        </div>
     </div>
 
     <!-- Div para exibir as regras do jogo -->

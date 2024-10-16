@@ -187,11 +187,16 @@ function endGame() {
     // Exibe a mensagem de vitória na tela
     const mensagemVitoria = document.getElementById('mensagemVitoria'); // Seleciona a div da mensagem de vitória
     const textoVitoria = document.getElementById('textoVitoria'); // Seleciona o parágrafo onde o texto será exibido
-    const contadorVitoria = document.getElementById('contadorVitoria'); // Seleciona o parágrafo onde o contador será exibido
+    const closeVictoryButton = document.getElementById('closeVictoryButton'); // Seleciona o botão de fechar a mensagem de vitória
 
     // Insere a mensagem de vitória com tempo, erros, pontuação e nome do jogador
     textoVitoria.textContent = `Parabéns, ${jogadorNome}! Você encontrou todos os pares!\nTempo: ${tempoDecorrido} segundos\nErros: ${erroCount}\nPontuação: ${pontuacao}\nContinue assim e melhore a cada jogada!`;
     mensagemVitoria.style.display = 'block'; // Exibe a div de vitória
+
+    // Evento para fechar a mensagem de vitória
+    closeVictoryButton.addEventListener('click', () => {
+        mensagemVitoria.style.display = 'none'; // Esconde a div de vitória ao clicar no botão de fechar
+    });
 
     // Cria o elemento de áudio
     const audioVitoria = new Audio('./assets/sound/vitoria.mp3'); // Cria o elemento de áudio com o caminho do som
@@ -201,7 +206,7 @@ function endGame() {
     let contador = 5; // Define o valor inicial do contador
     const intervaloContador = setInterval(() => { // Define o intervalo para o contador
         contador--; // Decrementa o valor do contador
-        contadorVitoria.textContent = contador; // Atualiza o contador na tela
+        textoVitoria.textContent = `Parabéns, ${jogadorNome}! Você encontrou todos os pares!\nTempo: ${tempoDecorrido} segundos\nErros: ${erroCount}\nPontuação: ${pontuacao}\nContinue assim e melhore a cada jogada!\nFechar em ${contador}...`; // Atualiza a mensagem de vitória na tela
         if (contador === 0) { // Quando o contador chega a 0
             clearInterval(intervaloContador); // Para o contador
             mensagemVitoria.style.display = 'none'; // Esconde a div de vitória
