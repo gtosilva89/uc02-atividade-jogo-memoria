@@ -2,7 +2,7 @@
 const images = [
     'w_7.png', 'w_8.png', 'w_10.png', 'w_11.png', 'w_95.png', 'w_98.png', 'w_Vista.png', 'w_XP.png',
     'w_7.png', 'w_8.png', 'w_10.png', 'w_11.png', 'w_95.png', 'w_98.png', 'w_Vista.png', 'w_XP.png'
-]
+];
 
 // VARIAVEIS DE CARTAS
 let primeiraCarta, segundaCarta;
@@ -10,13 +10,14 @@ let cartaVirada = false;
 let jogoBloqueado = false;
 let paresEncontrado = 0;
 let tempoInicial, contadorTempo;
+let erroCount = 0; // Contador de erros
 
 // APRESENTANDO A MATRIZ
 const board = document.getElementById('game');
 
-
-// CONTADOR
+// CONTADORES
 const timerDisplay = document.getElementById('timer');
+const errorCountDisplay = document.getElementById('errorCount'); // Contador de erros
 
 // FUNÇÃO PARA EMBARALHAR RANDOMICAMENTE
 function shuffle(array) {
@@ -25,6 +26,7 @@ function shuffle(array) {
 
 // FUNÇÃO QUE CRIA AS CARTAS
 function createBoard() {
+    console.log("Criando o tabuleiro..."); // Debug
     const shuffledImages = shuffle(images);
     shuffledImages.forEach(imgSrc => {
         const carta = document.createElement('div');
@@ -33,14 +35,15 @@ function createBoard() {
         carta.addEventListener('click', flipCard);
         board.appendChild(carta);
     });
+    console.log("Tabuleiro criado."); // Debug
 }
-
 
 // FUNÇÃO DO JOGO
 function flipCard() {
     if (jogoBloqueado) return;
     if (this === primeiraCarta) return;
     this.classList.add('flipped');
+
     if (!cartaVirada) {
         cartaVirada = true;
         primeiraCarta = this;
@@ -52,7 +55,7 @@ function flipCard() {
     }
 
     segundaCarta = this;
-    checkForMatch(); 
+    checkForMatch();
 }
 
 // FUNÇÃO QUE COMPARA AS CARTAS
@@ -64,10 +67,11 @@ function checkForMatch() {
             endGame();
         }
     } else {
+        erroCount++; // Incrementa o contador de erros
+        errorCountDisplay.textContent = `Erros: ${erroCount}`; // Atualiza o display
         unflipCards();
     }
 }
-
 
 // FUNÇÃO PARA PARES NÃO ENCONTRADOS
 function disableCards() {
@@ -92,7 +96,7 @@ function resetBoard() {
     [primeiraCarta, segundaCarta] = [null, null];
 }
 
-// INCIAR O CONTADOR
+// INICIAR O CONTADOR
 function tempoInicialr() {
     contadorTempo = setInterval(() => {
         const elapsedTime = Math.floor((new Date() - tempoInicial) / 1000);
@@ -110,11 +114,18 @@ function endGame() {
 function restartGame() {
     board.innerHTML = '';
     paresEncontrado = 0;
+    erroCount = 0;
+    errorCountDisplay.textContent = `Erros: ${erroCount}`;
     tempoInicial = null;
     clearInterval(contadorTempo);
     timerDisplay.textContent = `Tempo: 0s`;
+    cartaVirada = false;
+    jogoBloqueado = false;
+    primeiraCarta = null;
+    segundaCarta = null;
     createBoard();
 }
+
 
 // FUNÇÃO PARA REEMBARALHAR AS CARTAS
 function shuffleCards() {
@@ -125,6 +136,5 @@ function shuffleCards() {
 // EVENT LISTENERS PARA OS BOTÕES
 document.getElementById('restartButton').addEventListener('click', restartGame);
 document.getElementById('shuffleButton').addEventListener('click', shuffleCards);
-
 
 createBoard();
