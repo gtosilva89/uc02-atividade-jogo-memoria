@@ -239,10 +239,10 @@ function showRules() {
     const regrasDiv = document.getElementById('regras'); // Seleciona a div de regras
     const regrasContent = document.getElementById('regrasContent'); // Seleciona o contêiner das regras
 
-    // Define as regras do jogo
+    // Define as regras do jogo com estilo para remover marcadores de lista
     const regrasTexto = `
     <p>Bem-vindo ao Jogo da Memória! Aqui estão as regras:</p>
-    <ul>
+    <ul style="list-style-type: none; padding-left: 0;">
         <li>O objetivo do jogo é encontrar todos os pares de cartas.</li>
         <li>Clique no botão "Iniciar" e insira seu nome para começar.</li>
         <li>As cartas serão mostradas por 1.5 segundos ao início do jogo.</li>
@@ -263,6 +263,7 @@ function showRules() {
         regrasDiv.style.display = 'none'; // Esconde a div de regras após 10 segundos
     }, 10000); // 10 segundos
 }
+
 
 // FUNÇÃO PARA MOSTRAR OS RECORDES
 function showRecords() {

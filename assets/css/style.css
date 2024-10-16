@@ -14,6 +14,8 @@
 }
 
 body {
+    font-family: 'Comic Sans MS', sans-serif;
+    /* Define a fonte utilizada */
     display: flex;
     /* Usa flexbox para organizar os elementos filhos */
     justify-content: center;
@@ -24,6 +26,8 @@ body {
     /* Define a altura do body como 100% da altura da viewport */
     flex-direction: column;
     /* Organiza os filhos em uma coluna */
+    background-color: #FFFBCC;
+    /* Define a cor de fundo principal */
 }
 
 /* Estilos da div principal do jogo */
@@ -139,6 +143,8 @@ body {
 
 /* Estilos para a seção de botões */
 #buttons {
+    font-family: 'Comic Sans MS', sans-serif;
+    /* Define a fonte utilizada */
     margin-top: 10px;
     /* Adiciona um espaçamento superior antes dos botões */
     display: flex;
@@ -154,6 +160,8 @@ body {
 }
 
 button {
+    font-family: 'Comic Sans MS', sans-serif;
+    /* Define a fonte utilizada */
     padding: 10px 20px;
     /* Define o padding interno do botão */
     font-size: 16px;
@@ -174,10 +182,12 @@ button {
     /* Cada botão ocupa 50% da largura */
     text-align: center;
     /* Centraliza o texto */
+    background-color: #FF6B6B;
+    /* Define a cor de fundo dos botões inicial */
 }
 
 button:hover {
-    background-color: #ccc;
+    background-color: darkgreen;
     /* Muda a cor de fundo do botão ao passar o mouse */
 }
 
@@ -288,13 +298,13 @@ button:hover {
     /* Sombra suave para efeito de profundidade */
     z-index: 1000;
     /* Define um nível de empilhamento superior */
-    width: 500px;
+    width: 750px;
     /* Aumenta a largura da div */
     max-height: 80%;
     /* Define a altura máxima da div */
     overflow-y: auto;
     /* Permite rolagem vertical se o conteúdo ultrapassar a altura máxima */
-    text-align: left;
+    text-align: center;
     /* Alinha o texto à esquerda */
 }
 
